@@ -1,0 +1,121 @@
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Inter", sans-serif;
+}
+
+html, body, #root {
+  height: 100%;
+  width: 100%;
+  background-color: #1e1e1e;
+}
+
+/* Main Layout */
+main {
+  height: 100%;
+  width: 100%;
+  padding: 1.5rem;
+  display: flex;
+  gap: 1.5rem;
+}
+
+/* Panels */
+main .left,
+main .right {
+  height: 100%;
+  flex: 1;
+  border-radius: 1rem;
+  overflow: hidden;
+}
+
+/* LEFT PANEL (Editor Side) */
+main .left {
+  background: #0f0f0f;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.6);
+}
+
+.code .code,.code pre ,.code pre code{
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  border-radius: 0.7rem;
+  background: #000;
+}
+
+/* Code Area */
+.code {
+  flex: 1;
+  background-color: #000;
+  border-radius: 0.8rem;
+  padding: 1rem;
+  color: #00ff88;
+  font-family: "Fira Code", monospace;
+  font-size: 0.95rem;
+  overflow-y: auto;
+}
+
+/* Review Area */
+/* Review Button */
+.review {
+  align-self: flex-end;   /* move to left */
+  padding: 0.4rem 0.9rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+  border-radius: 0.5rem;
+  border: none;
+  cursor: pointer;
+  background: #8fedc1;
+  color: #000;
+  transition: all 0.2s ease-in-out;
+  margin-bottom: 0.8rem;
+  cursor: pointer
+  ;
+}
+
+.review:hover {
+  background: #9dc5b2;
+  transform: translateY(-1px);
+}
+
+/* RIGHT PANEL (Output / AI Side) */
+main .right {
+  background: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.05),
+    rgba(255, 255, 255, 0.02)
+  );
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.4);
+  padding: 1rem;
+  color: #eaeaea;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+}
+/* Force full black background for Prism */
+pre[class*="language-"],
+code[class*="language-"] {
+  background: #000000 !important;
+}
+
+/* Make entire code container black */
+.code {
+  flex: 1;
+  background: #000000;
+  border-radius: 0.8rem;
+  padding: 1rem;
+  overflow: auto;
+}
+
+/* Remove extra Prism padding conflicts */
+pre[class*="language-"] {
+  margin: 0 !important;
+  border-radius: 0.7rem;
+}
