@@ -8,7 +8,7 @@ const cookieParser = require("cookie-parser")
 const userRoutes = require("./routes/user.routes");
 
 try{
-   mongoose.connect(process.env.MONGODB_URI + 'ai-code')
+   mongoose.connect(process.env.MONGODB_URI)
     console.log('db connected')
 }catch(error){
     console.log(error)
