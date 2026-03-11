@@ -25,7 +25,7 @@ const Home = () => {
     const token = localStorage.getItem('authToken');
     
     const response = await axios.post(
-      `${import.meta.env.VITE_BACKEND_URL}/ai/get-response`,
+      `${import.meta.env.VITE_BACKEND}/ai/get-response`,
       { code },
       {
         withCredentials: true,
