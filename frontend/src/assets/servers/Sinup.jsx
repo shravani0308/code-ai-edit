@@ -18,7 +18,8 @@ export const Signup = () => {
 
     try{
       const {data} = await axios.post(
-        "http://localhost:3000/user/signup",
+                 `${import.meta.env.VITE_BACKEND}/user/signup`,
+
         {username,email,password},
         {
           withCredentials:true,

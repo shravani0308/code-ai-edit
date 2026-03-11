@@ -17,7 +17,7 @@ export const Login = () => {
 
     try{
       const {data} = await axios.post(
-        "http://localhost:3000/user/login",
+         `${import.meta.env.VITE_BACKEND}/user/login`,
         {email,password},
         {
           withCredentials:true,

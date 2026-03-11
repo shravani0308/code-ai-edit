@@ -4,6 +4,7 @@ import Home from './assets/servers/Home'
 import { Signup } from './assets/servers/Sinup'
 import { Login } from './assets/servers/Login'
 import './App.css'
+import  {Toaster} from 'react-hot-toast'
 
 const App = () => {
   return (

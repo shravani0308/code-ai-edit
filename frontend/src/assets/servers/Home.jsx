@@ -23,7 +23,7 @@ const Home = () => {
   async function reviewCode() {
     try {
       const response = await axios.post(
-        "http://localhost:3000/ai/get-response",
+      `${import.meta.env.VITE_BACKEND}/ai/get-response`,
         { code },
         {
            withCredentials: true,
