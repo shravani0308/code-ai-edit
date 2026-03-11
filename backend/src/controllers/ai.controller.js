@@ -10,6 +10,6 @@ module.exports.getResponse = async (req, res) => {
 
     const response = await aiService(code);
 
-    res.send(response)
+    res.json({review:response})
 
   }

@@ -21,21 +21,24 @@ const Home = () => {
   }, [code]);
 
   async function reviewCode() {
-  try {
-    const response = await axios.post(
-      "http://localhost:3000/ai/get-response",
-      { code },
-      {
-        withCredentials: true
-      }
-    );
+    try {
+      const response = await axios.post(
+        "http://localhost:3000/ai/get-response",
+        { code },
+        {
+           withCredentials: true,
+           headers:{
+            "Content-Type":"application/json"
+          }
 
-    setReview(response.data.review);
+        }
+      );
 
-  } catch (error) {
-    console.error(error);
+      setReview(response.data.review);
+    } catch (error) {
+      console.error(error);
+    }
   }
-}
 
   return (
     <main>
