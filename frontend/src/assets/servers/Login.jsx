@@ -15,9 +15,12 @@ export const Login = () => {
   const handleSubmit = async (e)=>{
     e.preventDefault();
 
+    const backendUrl = import.meta.env.VITE_BACKEND|| '';
+    console.log('Backend URL:', backendUrl); // Debug log
+    
     try{
       const {data} = await axios.post(
-         `${import.meta.env.VITE_BACKEND}/user/login`,
+        `${backendUrl}/user/login`,
         {email,password},
         {
           withCredentials:true,
@@ -27,6 +30,11 @@ export const Login = () => {
         }
       )
 
+      // Store token in localStorage for cross-origin requests
+      if (data.token) {
+        localStorage.setItem('authToken', data.token);
+      }
+
       toast.success(data.message || "Login successful");
 
       setEmail("");
@@ -35,7 +43,8 @@ export const Login = () => {
       navigateT("/");
 
     }catch(error){
-      toast.error(error.response?.data?.errors || "Login failed");
+      console.error('Login error:', error);
+      toast.error(error.response?.data?.message || error.response?.data?.errors || "Login failed");
     }
   }
 
