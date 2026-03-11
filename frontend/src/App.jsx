@@ -3,14 +3,15 @@ import { Route,Router,Routes } from 'react-router-dom'
 import Home from './assets/servers/Home'
 import { Signup } from './assets/servers/Sinup'
 import { Login } from './assets/servers/Login'
+import './App.css'
 
 const App = () => {
   return (
     <div>
       <Routes>
         <Route path="/" element={<Home/>}/>
-        <Route path='/' element={<Signup/>}/>
-        <Route path='/' element={<Login/>}/>
+        <Route path='/Signup' element={<Signup/>}/>
+        <Route path='/login' element={<Login/>}/>
       </Routes>
     </div>
 

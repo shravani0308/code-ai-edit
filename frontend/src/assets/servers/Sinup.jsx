@@ -1,7 +1,9 @@
-import axios from 'axios';
-import React, { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
-import {toast} from 'react-hot-toast'
+import axios from "axios";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-hot-toast";
+
+// import "./signup.css";
 
 export const Signup = () => {
 
@@ -9,85 +11,88 @@ export const Signup = () => {
   const [email,setEmail]=useState("");
   const [password,setPassword]=useState("");
 
-  const naviagateT=useNavigate();
+  const navigateT = useNavigate();
 
-  const handleSubmit=async(e)=>{
+  const handleSubmit = async(e)=>{
     e.preventDefault();
+
     try{
-     const {data}= await axios.post("http://localhost:3000/user/signup",{
-      username,email,password
-     }
-    ,{
-      withCredentials:true,
-      headers:{
-        "Content-Type":"application/json"
-      }
-    })
-    console.log(data);
-    toast.success(data.message || "registration successful");
-    setUsername("");
-    setEmail("");
-    setPassword("");
-    naviagateT("/login");
+      const {data} = await axios.post(
+        "http://localhost:3000/user/signup",
+        {username,email,password},
+        {
+          withCredentials:true,
+          headers:{
+            "Content-Type":"application/json"
+          }
+        }
+      )
+
+      toast.success(data.message || "Registration successful");
+
+      setUsername("");
+      setEmail("");
+      setPassword("");
+
+      navigateT("/login");
+
     }catch(error){
-      console.log(error);
-      toast.error(error.response.data.errors ||"registeration failed");
+      toast.error(error.response?.data?.errors || "Registration failed");
     }
   }
+
   return (
-    <div className='flex h-screen justify-center items-center bg-gray-100'>
-      <div className='w-full max-w-md p-8 bg-white rounded-lg shadow-lg'>
-        <div className='text-2xl font-semibold mb-5 text-center'>Sign up</div>
+    <div className="signup-page">
+
+      <div className="signup-card">
+
+        <h2 className="signup-title">Sign Up</h2>
 
         <form onSubmit={handleSubmit}>
-          <div className='mb-4'>
-            <label className='block mb-1 font-semibold'>Username</label>
+
+          <div className="input-group">
+            <label>Username</label>
             <input
               type="text"
-              placeholder='Type username'
+              placeholder="Enter username"
               value={username}
               onChange={(e)=>setUsername(e.target.value)}
-              className='w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500'
             />
           </div>
 
-          <div className='mb-4'>
-            <label className='block mb-1 font-semibold'>Email</label>
+          <div className="input-group">
+            <label>Email</label>
             <input
               type="email"
-              placeholder='Type email'
+              placeholder="Enter email"
               value={email}
               onChange={(e)=>setEmail(e.target.value)}
-              className='w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500'
             />
           </div>
 
-          <div className='mb-4'>
-            <label className='block mb-1 font-semibold'>Password</label>
+          <div className="input-group">
+            <label>Password</label>
             <input
               type="password"
-              placeholder='Type password'
+              placeholder="Enter password"
               value={password}
               onChange={(e)=>setPassword(e.target.value)}
-              className='w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500'
             />
           </div>
 
-          <button
-            className='w-full bg-blue-600 text-white hover:bg-blue-900 duration-300 rounded-xl font-semibold p-3'
-            type='submit'
-          >
+          <button className="signup-btn" type="submit">
             Sign Up
           </button>
 
-          <p className='mt-4 text-center text-gray-600'>
+          <p className="signup-login">
             Already have an account?
-            <Link to='/login' className='text-blue-600 hover:underline ml-1'>
-              Login
-            </Link>
+            <Link to="/login">Login</Link>
           </p>
+
         </form>
+
       </div>
+
     </div>
   )
 }

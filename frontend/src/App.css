@@ -13,8 +13,16 @@ html,body,#root{
 }
 
 /* MAIN LAYOUT */
-main{
+/* main{
   height:100%;
+  width:100%;
+  padding:1.5rem;
+  display:flex;
+  gap:1.5rem;
+} */
+
+main{
+  height:100vh;
   width:100%;
   padding:1.5rem;
   display:flex;
@@ -43,6 +51,21 @@ main .left{
 /* CODE AREA */
 .code{
   flex:1;
+  background:#0a0a0a;
+  border-radius:12px;
+  padding:1rem;
+  color:#00ff9d;
+  font-family:"Fira Code",monospace;
+  font-size:0.95rem;
+  overflow:auto;
+  box-shadow:inset 0 0 20px rgba(0,255,150,0.15);
+}
+
+
+
+.code{
+  flex:1;
+  height:100%;
   background:#0a0a0a;
   border-radius:12px;
   padding:1rem;
@@ -145,4 +168,218 @@ main .right{
 
 ::-webkit-scrollbar-track{
   background:#111;
+}
+
+
+
+
+
+/* PAGE BACKGROUND */
+.signup-page {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+}
+
+/* CARD */
+.signup-card {
+  width: 380px;
+  padding: 40px;
+  border-radius: 18px;
+
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(18px);
+
+  border: 1px solid rgba(255, 255, 255, 0.15);
+
+  box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+}
+
+/* TITLE */
+.signup-title {
+  text-align: center;
+  font-size: 28px;
+  font-weight: 600;
+  color: white;
+  margin-bottom: 25px;
+}
+
+/* INPUT GROUP */
+.input-group {
+  margin-bottom: 18px;
+}
+
+.input-group label {
+  color: #ddd;
+  font-size: 14px;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 12px;
+  margin-top: 6px;
+
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.2);
+
+  background: rgba(0,0,0,0.4);
+  color: white;
+
+  outline: none;
+}
+
+/* INPUT FOCUS */
+.input-group input:focus {
+  border-color: #00ffa3;
+  box-shadow: 0 0 10px rgba(0,255,170,0.6);
+}
+
+/* BUTTON */
+.signup-btn {
+  width: 100%;
+  padding: 12px;
+
+  border: none;
+  border-radius: 10px;
+
+  font-weight: 600;
+  font-size: 16px;
+
+  background: linear-gradient(135deg, #00ffa3, #00c6ff);
+  color: black;
+
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.signup-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 25px rgba(0,255,170,0.6);
+}
+
+/* LOGIN LINK */
+.signup-login {
+  margin-top: 15px;
+  text-align: center;
+  color: #ccc;
+}
+
+.signup-login a {
+  color: #00ffa3;
+  margin-left: 5px;
+  text-decoration: none;
+}
+
+.signup-login a:hover {
+  text-decoration: underline;
+}
+
+                   /* login */
+
+
+
+/* PAGE BACKGROUND */
+.login-page {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+}
+
+/* CARD */
+.login-card {
+  width: 380px;
+  padding: 40px;
+  border-radius: 18px;
+
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(18px);
+
+  border: 1px solid rgba(255,255,255,0.15);
+
+  box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+}
+
+/* TITLE */
+.login-title {
+  text-align: center;
+  font-size: 28px;
+  font-weight: 600;
+  color: white;
+  margin-bottom: 25px;
+}
+
+/* INPUT GROUP */
+.login-group {
+  margin-bottom: 18px;
+}
+
+.login-group label {
+  color: #ddd;
+  font-size: 14px;
+}
+
+.login-group input {
+  width: 100%;
+  padding: 12px;
+  margin-top: 6px;
+
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.2);
+
+  background: rgba(0,0,0,0.4);
+  color: white;
+
+  outline: none;
+}
+
+/* INPUT FOCUS */
+.login-group input:focus {
+  border-color: #00ffa3;
+  box-shadow: 0 0 10px rgba(0,255,170,0.6);
+}
+
+/* BUTTON */
+.login-btn {
+  width: 100%;
+  padding: 12px;
+
+  border: none;
+  border-radius: 10px;
+
+  font-weight: 600;
+  font-size: 16px;
+
+  background: linear-gradient(135deg,#00ffa3,#00c6ff);
+  color: black;
+
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.login-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 25px rgba(0,255,170,0.6);
+}
+
+/* SIGNUP LINK */
+.login-signup {
+  margin-top: 15px;
+  text-align: center;
+  color: #ccc;
+}
+
+.login-signup a {
+  color: #00ffa3;
+  margin-left: 5px;
+  text-decoration: none;
+}
+
+.login-signup a:hover {
+  text-decoration: underline;
 }

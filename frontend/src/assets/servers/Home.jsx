@@ -5,10 +5,11 @@ import Editor from "react-simple-code-editor";
 import axios from "axios";
 import ReactMarkdown from "react-markdown";
 
+
 import "prismjs/themes/prism-tomorrow.css";
 
 const Home = () => {
-    function App() {
+    
   const [code, setCode] = useState(`function sum() {
   return 1 + 1;
 }`);
@@ -17,20 +18,24 @@ const Home = () => {
 
   useEffect(() => {
     Prism.highlightAll();
-  }, []);
+  }, [code]);
 
   async function reviewCode() {
-    try {
-      const response = await axios.post(
-        "http://localhost:3000/ai/get-response",
-        { code }
-      );
+  try {
+    const response = await axios.post(
+      "http://localhost:3000/ai/get-response",
+      { code },
+      {
+        withCredentials: true
+      }
+    );
 
-      setReview(response.data);
-    } catch (error) {
-      console.error(error);
-    }
+    setReview(response.data.review);
+
+  } catch (error) {
+    console.error(error);
   }
+}
 
   return (
     <main>
@@ -68,6 +73,6 @@ const Home = () => {
 }
 
   
-}
+
 
 export default Home;
