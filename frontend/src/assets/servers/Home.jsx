@@ -21,24 +21,31 @@ const Home = () => {
   }, [code]);
 
   async function reviewCode() {
-    try {
-      const response = await axios.post(
-      `${import.meta.env.VITE_BACKEND}/ai/get-response`,
-        { code },
-        {
-           withCredentials: true,
-           headers:{
-            "Content-Type":"application/json"
-          }
-
+  try {
+    const token = localStorage.getItem('authToken');
+    
+    const response = await axios.post(
+      `${import.meta.env.VITE_BACKEND_URL}/ai/get-response`,
+      { code },
+      {
+        withCredentials: true,
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
         }
-      );
+      }
+    );
 
-      setReview(response.data.review);
-    } catch (error) {
-      console.error(error);
+    setReview(response.data.review);
+
+  } catch (error) {
+    console.error(error);
+    if (error.response?.status === 401) {
+      // Redirect to login if unauthorized
+      window.location.href = '/login';
     }
   }
+}
 
   return (
     <main>
