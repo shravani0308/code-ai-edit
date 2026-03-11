@@ -7,21 +7,13 @@ const cookieParser = require("cookie-parser")
 
 const userRoutes = require("./routes/user.routes");
 
-const connectDB = async () => {
-  try {
-    await mongoose.connect(process.env.MONGODB_URI, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
-    console.log('MongoDB connected successfully');
-  } catch (error) {
-    console.error('MongoDB connection error:', error);
-    process.exit(1);
-  }
-};
 
-connectDB();
-
+try{
+    mongoose.connect(process.env.MONGODB_URI);
+    console.log('db connected')
+}catch(error){
+    console.log(error)
+}
 app.use(express.json());
 app.use(cors({
   origin:process.env.FRONTEND_URL,
