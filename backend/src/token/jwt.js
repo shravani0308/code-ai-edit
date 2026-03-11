@@ -9,11 +9,14 @@ const generateTokenAndSaveInCookies = async (userId, res) => {
     { expiresIn: "10d" }
   );
 
+  const isProduction = process.env.NODE_ENV === 'production';
+
   res.cookie("jwt", token, {
     httpOnly: true,
-    secure: false,
-    sameSite: "lax",
-    path: "/"
+    secure: isProduction, // true for production (HTTPS)
+    sameSite: isProduction ? "none" : "lax", // "none" for cross-origin in production
+    path: "/",
+    maxAge: 10 * 24 * 60 * 60 * 1000 // 10 days
   });
 
   await User.findByIdAndUpdate(userId, { token });
