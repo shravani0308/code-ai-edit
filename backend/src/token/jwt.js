@@ -1,27 +1,47 @@
 const jwt = require("jsonwebtoken");
-const User = require("../model/user.model.js");
+const User = require("../model/user.model");
 
-const generateTokenAndSaveInCookies = async (userId, res) => {
+const authenticate = async (req, res, next) => {
+  try {
+    // Try to get token from cookie first, then from Authorization header
+    let token = req.cookies.jwt;
+    console.log("Cookie token:", token ? "Found" : "Not found");
+    
+    if (!token) {
+      const authHeader = req.headers.authorization;
+      console.log("Auth header:", authHeader ? "Found" : "Not found");
+      if (authHeader && authHeader.startsWith('Bearer ')) {
+        token = authHeader.substring(7); // Remove 'Bearer ' prefix
+        console.log("Bearer token extracted:", token ? "Success" : "Failed");
+      }
+    }
 
-  const token = jwt.sign(
-    { userId: userId },
-    process.env.JWT_SECRET,
-    { expiresIn: "10d" }
-  );
+    if (!token) {
+      console.log("No token found in cookies or headers");
+      return res.status(401).json({ message: "Unauthorized - No token provided" });
+    }
 
-  const isProduction = process.env.NODE_ENV === 'production';
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
-  res.cookie("jwt", token, {
-    httpOnly: true,
-    secure: isProduction, // true for production (HTTPS)
-    sameSite: isProduction ? "none" : "lax", // "none" for cross-origin in production
-    path: "/",
-    maxAge: 10 * 24 * 60 * 60 * 1000 // 10 days
-  });
+    if (!decoded) {
+      console.log("Token verification failed");
+      return res.status(401).json({ message: "Unauthorized - Invalid token" });
+    }
 
-  await User.findByIdAndUpdate(userId, { token });
+    const user = await User.findById(decoded.userId).select("-password");
 
-  return token;
+    if (!user) {
+      console.log("User not found for token");
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    req.user = { user };
+    next();
+
+  } catch (error) {
+    console.log("Error in authenticate middleware:", error);
+    res.status(401).json({ message: "Unauthorized - Invalid token" });
+  }
 };
 
-module.exports = { generateTokenAndSaveInCookies };
+module.exports = { authenticate };
